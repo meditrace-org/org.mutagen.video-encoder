@@ -14,6 +14,9 @@ services:
     deploy:
       mode: replicated
       replicas: $REPLICAS
+    volumes:
+      - ./data:/
+
 
   prometheus:
     image: prom/prometheus
