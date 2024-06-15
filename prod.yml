@@ -3,9 +3,10 @@ version: "3.9"
 services:
   video_encoder:
     image: video_encoder
+    env_file: .env
     deploy:
       mode: replicated
-      replicas: 4
+      replicas: $REPLICAS
 
       restart_policy:
         condition: on-failure
