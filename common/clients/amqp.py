@@ -35,7 +35,7 @@ class Session:
             port=port,
             virtual_host=virtual_host,
             credentials=pika.PlainCredentials(username, password),
-            heartbeat=600,
+            heartbeat=int(os.environ['MQ_TIMEOUT_SECONDS']),
             blocked_connection_timeout=300,
         )
 
