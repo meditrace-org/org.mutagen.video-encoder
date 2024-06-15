@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  video_encoder:
+    image: video_encoder
+    deploy:
+      mode: replicated
+      replicas: 4
+
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
