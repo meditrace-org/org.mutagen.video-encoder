@@ -4,6 +4,7 @@ version: '3.9'
 services:
 
   encoder:
+    image: video-encoder
     build:
       context: .
       dockerfile: ./Dockerfile
