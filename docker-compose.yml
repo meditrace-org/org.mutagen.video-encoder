@@ -4,7 +4,7 @@ version: '3.9'
 services:
 
   encoder:
-    image: video-encoder
+    image: mutagen-video-encoder
     build:
       context: .
       dockerfile: ./Dockerfile

@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   video_encoder:
-    image: video_encoder
+    image: mutagen-video-encoder
     env_file: .env
     deploy:
       mode: replicated
