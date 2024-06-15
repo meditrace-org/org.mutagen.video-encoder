@@ -80,7 +80,7 @@ class Session:
         self,
         queue: str,
         auto_ack: bool = False,
-        prefetch_count: int = 1
+        prefetch_count: int = 3
     ):
         """
         Consume messages from RabbitMQ.
