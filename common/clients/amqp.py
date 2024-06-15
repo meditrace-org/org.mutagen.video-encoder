@@ -3,7 +3,7 @@ from typing import Optional, Callable
 import pika
 from pika import BlockingConnection, BasicProperties, ConnectionParameters
 from pika.adapters.blocking_connection import BlockingChannel
-
+import os
 
 class Session:
     """
@@ -80,7 +80,7 @@ class Session:
         self,
         queue: str,
         auto_ack: bool = False,
-        prefetch_count: int = 3
+        prefetch_count: int = int(os.environ['RABBITMQ__PREFETCH_COUNT'])
     ):
         """
         Consume messages from RabbitMQ.
