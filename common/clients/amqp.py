@@ -87,6 +87,11 @@ class Session:
 
         Message callback should be set via `on_message` decorator.
         """
+
+        print("="*30)
+        print(f"Prefetch count = {prefetch_count}")
+        print("="*30)
+
         self.ensure_connection()
         input_channel = self._connection.channel()
         input_channel.basic_qos(prefetch_count=prefetch_count)

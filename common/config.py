@@ -45,7 +45,6 @@ class RabbitMQSettings(BaseModel):
     audio_chunks_queue: str = "audio_chunks"
 
     prefetch_count: PositiveInt = int(os.environ['RABBITMQ__PREFETCH_COUNT'])
-    print(f"Prefetch count = {prefetch_count}")
 
 
 class Settings(BaseSettings):
