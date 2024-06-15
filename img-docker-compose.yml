@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  video_encoder:
+    image: idfedorov09/mutagen:EV-0.1
+    environment:
+      - RABBITMQ__PREFETCH_COUNT=20
+      - MQ_TIMEOUT_SECONDS=1000000
+      - REPLICAS=3
+    deploy:
+      mode: replicated
+      replicas: 2
+
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 100
+        window: 120s
+
+name: mutagen_encoder_video
