@@ -8,12 +8,12 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      - RABBITMQ__PREFETCH_COUNT=2
+      - RABBITMQ__PREFETCH_COUNT=${RABBITMQ__PREFETCH_COUNT}
     restart: unless-stopped
-    env_file: ${PWD}/.env
+    env_file: .env
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: $REPLICAS
 
   prometheus:
     image: prom/prometheus
