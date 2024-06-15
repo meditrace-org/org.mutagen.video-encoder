@@ -5,7 +5,7 @@ services:
     image: idfedorov09/mutagen:EV-0.1
     environment:
       - RABBITMQ__PREFETCH_COUNT=20
-      - MQ_TIMEOUT_SECONDS=1000000
+      - MQ_TIMEOUT_SECONDS=18000
       - REPLICAS=3
     deploy:
       mode: replicated
