@@ -1,4 +1,4 @@
-FROM huggingface/transformers-inference:4.24.0-pt1.13-cpu
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
 #set up environment
 RUN apt-get update \

@@ -4,9 +4,13 @@ from numpy.linalg import norm
 from scenedetect import detect, AdaptiveDetector, split_video_ffmpeg
 from transformers import AutoModel
 from decord import VideoReader, cpu
+import torch
 import os
 import glob
 np.random.seed(0)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 CLIP_MODEL = 'jinaai/jina-clip-v1'
 SAMPLE_FRAMES = 4
@@ -31,7 +35,7 @@ def cosine_similarity(a, b):
 class VideoProcessing:
 
     def __init__(self):
-        self.clip = AutoModel.from_pretrained(CLIP_MODEL, trust_remote_code=True)
+        self.clip = AutoModel.from_pretrained(CLIP_MODEL, trust_remote_code=True).to(device)
 
     def __split(self, video_path):
 

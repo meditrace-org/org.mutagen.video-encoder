@@ -1,12 +1,16 @@
 import base64
 import json
 import pika
+import time
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic
 from common.config import settings
 from common.clients.amqp import Session
 import app.monitoring as monitoring
 from app.pipeline import VideoProcessing
+import logging
+
+#logging.getLogger("pyscenedetect").setLevel(level=logging.ERROR)
 
 session = Session()
 session.set_connection_params(
@@ -29,6 +33,7 @@ def on_message(channel: BlockingChannel, method: Basic.Deliver,
                properties: pika.BasicProperties, body: bytes):
     monitoring.timer.start('preprocessing')
 
+    start = time.time()
     value = json.loads(body.decode().replace("'", '"'))
     id = value['uuid']
     print(f"Going to process {id}")
@@ -44,7 +49,7 @@ def on_message(channel: BlockingChannel, method: Basic.Deliver,
     monitoring.timer.start('inference')
 
     embs = pipeline.run(file_path)
-    print(f"FOR VIDEO {id} GOT {len(embs)} VECTORS")
+    print(f"FOR VIDEO {id} GOT {len(embs)} VECTORS FOR {round(time.time() - start)} seconds")
 
     for emb in embs:
         send = {
